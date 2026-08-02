@@ -446,6 +446,7 @@
         }
         
         function startReveal() {
+            document.body.style.overflow = 'hidden';
             // Generate random draft order
             const shuffledTeams = shuffleArray(teams);
             draftOrder = shuffledTeams.map((team, index) => ({
@@ -570,6 +571,9 @@
 
             // Hide the revealed picks sidebar
             document.getElementById('revealed-picks').classList.remove('visible');
+
+            // Allow page to scroll on summary
+            document.body.style.overflow = 'auto';
             
             const listEl = document.getElementById('draft-order-list');
             listEl.innerHTML = '';
@@ -590,6 +594,8 @@
         }
         
         function restartReveal() {
+            document.body.style.overflow = 'hidden';
+
             // Reset to welcome screen
             document.getElementById('summary-screen').classList.remove('active');
             document.getElementById('welcome-screen').classList.add('active');
