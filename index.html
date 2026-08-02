@@ -180,21 +180,6 @@
             left: 0;
         }
 
-        .draft-position {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            margin-top: auto;
-            padding: 8px 12px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #000000;
-            background: rgba(50, 205, 50, 0.88);
-            text-align: center;
-            font-family: 'Oswald', sans-serif;
-            letter-spacing: 1px;
-            flex-shrink: 0;
-        }
         
         .continue-text {
             font-size: 1.2rem;
@@ -249,12 +234,19 @@
             min-width: 60px;
         }
 
+        .order-team-name {
+            flex: 1;
+            font-weight: 600;
+            padding: 0 12px;
+        }
+
         .order-team-image {
             width: 60px;
             height: 42px;
             object-fit: cover;
             border-radius: 6px;
             border: 1px solid rgba(50, 205, 50, 0.4);
+            flex-shrink: 0;
         }
         
         .restart-button {
@@ -400,7 +392,6 @@
                     </div>
                     <div class="card-back">
                         <img class="team-image" id="team-image" src="" alt="Team">
-                        <div class="draft-position" id="draft-position">Draft Position #12</div>
                     </div>
                 </div>
             </div>
@@ -421,8 +412,8 @@
     <script>
         const teams = [
             "Lone Star Legends", "Denver Yetis", "Food Mafia", "D-Town Swirlies",
-            "Rochester Jesters", "Mt. Fuji Murder Hornets", "GFFT", "Prestige WorldWide",
-            "Sonora Sugar Skulls", "Brutal Hogs", "CBG", "California Burritos"
+            "Rochester Jesters", "Mt. Fuji Murder Hornets", "Gilbert FFF (Bryce)", "Prestige WorldWide",
+            "Sonora Sugar Skulls", "Brutal Hogs", "Cali Bird Gang", "California Burritos"
         ];
 
         const teamImages = {
@@ -432,11 +423,11 @@
             "D-Town Swirlies":        "DTownSwirlies.jpeg",
             "Rochester Jesters":      "RochesterJesters.jpeg",
             "Mt. Fuji Murder Hornets":"MurderHornets.jpeg",
-            "GFFT":                   "GFFT.jpeg",
+            "Gilbert FFF (Bryce)":    "GFFT.jpeg",
             "Prestige WorldWide":     "PrestigeWorldwide.jpeg",
             "Sonora Sugar Skulls":    "SonoraSugarSkulls.jpeg",
             "Brutal Hogs":            "BrutalHogs.jpeg",
-            "CBG":                    "BirdGang.jpeg",
+            "Cali Bird Gang":         "BirdGang.jpeg",
             "California Burritos":    "CaliforniaBurritos.jpeg"
         };
         
@@ -502,7 +493,6 @@
         function revealCard() {
             const cardInner = document.getElementById('card-inner');
             const teamImageEl = document.getElementById('team-image');
-            const draftPositionEl = document.getElementById('draft-position');
             const revealingTextEl = document.getElementById('revealing-text');
             const continueText = document.getElementById('continue-text');
 
@@ -512,7 +502,6 @@
             // Update card content
             teamImageEl.src = teamImages[teamData.team] || '';
             teamImageEl.alt = teamData.team;
-            draftPositionEl.textContent = `Draft Position #${currentPick}`;
             
             // Add special effect for #1 pick
             if (currentPick === 1) {
@@ -578,6 +567,9 @@
         function showSummary() {
             document.getElementById('reveal-screen').classList.remove('active');
             document.getElementById('summary-screen').classList.add('active');
+
+            // Hide the revealed picks sidebar
+            document.getElementById('revealed-picks').classList.remove('visible');
             
             const listEl = document.getElementById('draft-order-list');
             listEl.innerHTML = '';
@@ -590,6 +582,7 @@
                 orderItem.className = 'order-item';
                 orderItem.innerHTML = `
                     <span class="order-position">#${item.position}</span>
+                    <span class="order-team-name">${item.team}</span>
                     <img class="order-team-image" src="${teamImages[item.team] || ''}" alt="${item.team}">
                 `;
                 listEl.appendChild(orderItem);
