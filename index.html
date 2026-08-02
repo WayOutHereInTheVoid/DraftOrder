@@ -475,7 +475,8 @@
             const cardInner = document.getElementById('card-inner');
             const continueText = document.getElementById('continue-text');
             
-            // Reset card
+            // Reset card and clear stale image before unflipping
+            document.getElementById('team-image').src = '';
             cardInner.classList.remove('flipped');
             continueText.style.display = 'none';
             isRevealing = true;
