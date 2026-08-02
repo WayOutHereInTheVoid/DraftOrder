@@ -477,6 +477,7 @@
             
             // Reset card and clear stale image before unflipping
             document.getElementById('team-image').src = '';
+            document.getElementById('draft-card').classList.remove('first-pick-special');
             cardInner.classList.remove('flipped');
             continueText.style.display = 'none';
             isRevealing = true;
@@ -505,13 +506,14 @@
             teamImageEl.src = teamImages[teamData.team] || '';
             teamImageEl.alt = teamData.team;
             
-            // Add special effect for #1 pick
+            // Add special effect for #1 pick (on outer card, not card-inner, to avoid conflicting with flip transform)
+            const draftCardEl = document.getElementById('draft-card');
             if (currentPick === 1) {
-                cardInner.classList.add('first-pick-special');
+                draftCardEl.classList.add('first-pick-special');
             } else {
-                cardInner.classList.remove('first-pick-special');
+                draftCardEl.classList.remove('first-pick-special');
             }
-            
+
             // Flip card
             cardInner.classList.add('flipped');
             
