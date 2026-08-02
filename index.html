@@ -180,21 +180,6 @@
             left: 0;
         }
 
-        .draft-position {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            margin-top: auto;
-            padding: 8px 12px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #000000;
-            background: rgba(50, 205, 50, 0.88);
-            text-align: center;
-            font-family: 'Oswald', sans-serif;
-            letter-spacing: 1px;
-            flex-shrink: 0;
-        }
         
         .continue-text {
             font-size: 1.2rem;
@@ -400,7 +385,6 @@
                     </div>
                     <div class="card-back">
                         <img class="team-image" id="team-image" src="" alt="Team">
-                        <div class="draft-position" id="draft-position">Draft Position #12</div>
                     </div>
                 </div>
             </div>
@@ -502,7 +486,6 @@
         function revealCard() {
             const cardInner = document.getElementById('card-inner');
             const teamImageEl = document.getElementById('team-image');
-            const draftPositionEl = document.getElementById('draft-position');
             const revealingTextEl = document.getElementById('revealing-text');
             const continueText = document.getElementById('continue-text');
 
@@ -512,7 +495,6 @@
             // Update card content
             teamImageEl.src = teamImages[teamData.team] || '';
             teamImageEl.alt = teamData.team;
-            draftPositionEl.textContent = `Draft Position #${currentPick}`;
             
             // Add special effect for #1 pick
             if (currentPick === 1) {
