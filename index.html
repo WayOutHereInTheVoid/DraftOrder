@@ -234,12 +234,19 @@
             min-width: 60px;
         }
 
+        .order-team-name {
+            flex: 1;
+            font-weight: 600;
+            padding: 0 12px;
+        }
+
         .order-team-image {
             width: 60px;
             height: 42px;
             object-fit: cover;
             border-radius: 6px;
             border: 1px solid rgba(50, 205, 50, 0.4);
+            flex-shrink: 0;
         }
         
         .restart-button {
@@ -560,6 +567,9 @@
         function showSummary() {
             document.getElementById('reveal-screen').classList.remove('active');
             document.getElementById('summary-screen').classList.add('active');
+
+            // Hide the revealed picks sidebar
+            document.getElementById('revealed-picks').classList.remove('visible');
             
             const listEl = document.getElementById('draft-order-list');
             listEl.innerHTML = '';
@@ -572,6 +582,7 @@
                 orderItem.className = 'order-item';
                 orderItem.innerHTML = `
                     <span class="order-position">#${item.position}</span>
+                    <span class="order-team-name">${item.team}</span>
                     <img class="order-team-image" src="${teamImages[item.team] || ''}" alt="${item.team}">
                 `;
                 listEl.appendChild(orderItem);
